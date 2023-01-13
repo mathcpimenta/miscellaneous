@@ -57,21 +57,21 @@ function getFinalWord(digits) {
         case 2:
             tens = Number(digits[0]) === 1 ? Number(digits[0] += digits[1]) : Number(digits[0] += "0");
             ones = Number(digits[1]);
+            
+            if(ones !== 0 && tens >=20) return `${numberMapping[tens]} e ${numberMapping[ones]}`
 
-            if(tens <= 19) return numberMapping[tens]
-
-            return `${numberMapping[tens]} e ${numberMapping[ones]}`
+            return numberMapping[tens]
         case 3:
             hundreds = Number(digits[0] += "00");
             tens = Number(digits[1]) === 1 ? Number(digits[1] += Number(digits[2])) : Number(digits[1] += "0");
             ones = Number(digits[2]);
 
             if (ones !== 0) return `${numberMapping[hundreds]} e ${numberMapping[tens]} e ${numberMapping[ones]}`;
-
+        
             return `${numberMapping[hundreds]} e ${numberMapping[tens]}`;
         default:
             // Handle numbers greater than or equal to 1000 tbd
     }   
 }
 
-translateNumber(115)
+translateNumber(21)
