@@ -58,7 +58,7 @@ function getFinalWord(digits) {
             tens = Number(digits[0]) === 1 ? Number(digits[0] += digits[1]) : Number(digits[0] += "0");
             ones = Number(digits[1]);
             
-            if(ones !== 0 && tens >=20) return `${numberMapping[tens]} e ${numberMapping[ones]}`
+            if(ones !== 0) return `${numberMapping[tens]} e ${numberMapping[ones]}`
 
             return numberMapping[tens]
         case 3:
