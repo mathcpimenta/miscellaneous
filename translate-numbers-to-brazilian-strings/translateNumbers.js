@@ -42,19 +42,13 @@ function numberToBrazilianWords(number) {
     
     if (number < 0) {
         return `menos ${numberToBrazilianWords(Math.abs(number))}`;
-    }
-    
-    if (number < 20) {
+    } else if (number < 20) {
         return numberMapping[number]
     } else if (number < 100) {
         const tens = Math.floor(number / 10) * 10;
         const units = number % 10
 
-        if(units === 0) {
-            return `${numberMapping[tens]}`
-        } else {
-            return `${numberMapping[tens]} e ${numberMapping[units]}`
-        }
+        return `${numberMapping[tens]} ${units === 0 ? '' : `e ${numberMapping[units]}`}`
 
     } else if (number > 100 && number < 200) {
         const tens = number % 100
@@ -65,11 +59,7 @@ function numberToBrazilianWords(number) {
         const hundreds = Math.floor(number / 100) * 100;
         const remaining = number % 100
 
-        if(remaining === 0) {
-            return `${numberMapping[hundreds]}`
-        } else {
-            return `${numberMapping[hundreds]} e ${numberToBrazilianWords(remaining)}`
-        }
+        return `${numberMapping[hundreds]} ${remaining === 0 ? '' : `e ${numberToBrazilianWords(remaining)}`}`
     } else {
         return number
     }
