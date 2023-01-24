@@ -38,40 +38,41 @@ const numberMapping = {
     900: "novecentos",
 }
 
-function translateNumber(n) {
-    const digits = getDigits(n);
-    const finalWord = getFinalWord(digits);
-    return finalWord;
-}
+function numberToBrazilianWords(number) {
+    
+    if (number < 20) {
+        return numberMapping[number]
+    } else if (number < 100) {
+        const tens = Math.floor(number / 10) * 10;
+        const units = number % 10
 
-function getDigits(n) {
-    return n.toString().split('');
-}
+        return `${numberMapping[tens]} e ${numberMapping[units]}`
 
-function getFinalWord(digits) {
-    let tens, ones, hundreds;
-
-    switch (digits.length) {
-        case 1:
-            return numberMapping[n];
-        case 2:
-            tens = Number(digits[0]) === 1 ? Number(digits[0] += digits[1]) : Number(digits[0] += "0");
-            ones = Number(digits[1]);
-            
-            if(ones !== 0) return `${numberMapping[tens]} e ${numberMapping[ones]}`
-
-            return numberMapping[tens]
-        case 3:
-            hundreds = Number(digits[0] += "00");
-            tens = Number(digits[1]) === 1 ? Number(digits[1] += Number(digits[2])) : Number(digits[1] += "0");
-            ones = Number(digits[2]);
-
-            if (ones !== 0) return `${numberMapping[hundreds]} e ${numberMapping[tens]} e ${numberMapping[ones]}`;
+    } else if (number > 100 && number < 200) {
+        const remaining = number % 100
         
-            return `${numberMapping[hundreds]} e ${numberMapping[tens]}`;
-        default:
-            // Handle numbers greater than or equal to 1000 tbd
-    }   
+        return `cento e ${numberToBrazilianWords(remaining)}`
+
+    } else if (number < 1000) {
+        const hundreds = Math.floor(number / 100) * 100;
+        const remaining = number % 100
+
+        if(remaining === 0) {
+            return `${numberMapping[hundreds]}`
+        } else {
+            return `${numberMapping[hundreds]} e ${numberToBrazilianWords(remaining)}`
+        }
+    } else {
+        return number
+    }
 }
 
-translateNumber(21)
+console.log(numberToBrazilianWords(8))
+console.log(numberToBrazilianWords(15))
+console.log(numberToBrazilianWords(21))
+console.log(numberToBrazilianWords(100))
+console.log(numberToBrazilianWords(110))
+console.log(numberToBrazilianWords(115))
+console.log(numberToBrazilianWords(384))
+console.log(numberToBrazilianWords(1384))
+console.log(numberToBrazilianWords(984))
