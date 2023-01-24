@@ -49,9 +49,9 @@ function numberToBrazilianWords(number) {
         return `${numberMapping[tens]} e ${numberMapping[units]}`
 
     } else if (number > 100 && number < 200) {
-        const remaining = number % 100
+        const tens = number % 100
         
-        return `cento e ${numberToBrazilianWords(remaining)}`
+        return `cento e ${numberToBrazilianWords(tens)}`
 
     } else if (number < 1000) {
         const hundreds = Math.floor(number / 100) * 100;
