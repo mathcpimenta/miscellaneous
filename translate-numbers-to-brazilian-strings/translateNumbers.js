@@ -46,7 +46,11 @@ function numberToBrazilianWords(number) {
         const tens = Math.floor(number / 10) * 10;
         const units = number % 10
 
-        return `${numberMapping[tens]} e ${numberMapping[units]}`
+        if(units === 0) {
+            return `${numberMapping[tens]}`
+        } else {
+            return `${numberMapping[tens]} e ${numberMapping[units]}`
+        }
 
     } else if (number > 100 && number < 200) {
         const tens = number % 100
@@ -73,6 +77,7 @@ console.log(numberToBrazilianWords(21))
 console.log(numberToBrazilianWords(100))
 console.log(numberToBrazilianWords(110))
 console.log(numberToBrazilianWords(115))
-console.log(numberToBrazilianWords(384))
+console.log(numberToBrazilianWords(129))
+console.log(numberToBrazilianWords(120))
 console.log(numberToBrazilianWords(1384))
 console.log(numberToBrazilianWords(984))
