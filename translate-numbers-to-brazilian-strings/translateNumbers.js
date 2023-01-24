@@ -40,6 +40,10 @@ const numberMapping = {
 
 function numberToBrazilianWords(number) {
     
+    if (number < 0) {
+        return `menos ${numberToBrazilianWords(Math.abs(number))}`;
+    }
+    
     if (number < 20) {
         return numberMapping[number]
     } else if (number < 100) {
@@ -79,5 +83,8 @@ console.log(numberToBrazilianWords(110))
 console.log(numberToBrazilianWords(115))
 console.log(numberToBrazilianWords(129))
 console.log(numberToBrazilianWords(120))
+console.log(numberToBrazilianWords(121))
 console.log(numberToBrazilianWords(1384))
 console.log(numberToBrazilianWords(984))
+console.log(numberToBrazilianWords(-984))
+
